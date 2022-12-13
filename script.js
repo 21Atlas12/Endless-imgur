@@ -28,7 +28,7 @@ var idLen = 5;
 async function getNewImage() {    
     disableControls(true)    
     
-    if (threads == 1) {
+    if (threads < 2) {
         await getValidId().then(
             function resolved(id) {
                 pushImage(id)
@@ -42,10 +42,9 @@ async function getNewImage() {
             newWorker.addEventListener("message", function(msg) {
                 var data = msg.data
                 if (data.startsWith("@")) {
-                    idLabel.innerHTML = data
+                    idLabel.innerHTML = "ID: " + data.replace("@", "")
                 } else {
                     pool.forEach((worker) => {
-                        console.log("murger")
                         worker.terminate()
                     })
     
