@@ -17,6 +17,7 @@ function setup() {
     imgHolder.crossOrigin = "anonymous"; 
 
     imgHolder.addEventListener("load", () => {
+        setupScaling()
         checkForFunny(imgHolder)
     })
 }
@@ -195,8 +196,7 @@ var currentScaling = scalingTypes.fit
 
 function pushImage(imgId) {    
     currentId = imgId
-    imgHolder.setAttribute("src", getUrl(currentId))
-    setupScaling()
+    imgHolder.setAttribute("src", getUrl(currentId))    
     historyBuffer.unshift(imgId)
     if (historyBuffer.length > 30) {
         historyBuffer.pop()
