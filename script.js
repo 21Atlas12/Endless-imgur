@@ -22,7 +22,7 @@ function setup() {
     })
 
     document.onkeyup = function(e) {
-        if (!disableControls) {
+        if (!controlsDisabled) {
             if (e.key == " " ||
             e.code == "Space" ||      
             e.keyCode == 32      
