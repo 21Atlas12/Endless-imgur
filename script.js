@@ -405,13 +405,12 @@ function getTouches(evt) {
   return evt.touches
 }                                                     
                                                                          
-function handleTouchStart(evt) {
-    document.getElementById("title").classList.add("mobile")
-    document.getElementById("controls").classList.add("mobile")
-    
+function handleTouchStart(evt) {      
     const firstTouch = getTouches(evt)[0];                                      
     xDown = firstTouch.clientX;                                      
-    yDown = firstTouch.clientY;                                      
+    yDown = firstTouch.clientY; 
+    
+    setMobileMode(true)
 };
                                                                          
 function handleTouchMove(evt) {
@@ -449,4 +448,18 @@ function handleTouchMove(evt) {
         yDown = null;  
     }                                               
 };
+
+function setMobileMode(enabled) {
+    var section = document.getElementById("section")
+
+    var children = section.querySelectorAll()
+    children.forEach((child) => {
+        if (enabled) {
+            child.classList.add("mobile")
+        } else {
+            child.classList.remove("mobile")
+        }
+    })
+
+}
 //#endregion

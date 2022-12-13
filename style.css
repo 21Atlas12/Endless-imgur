@@ -75,7 +75,8 @@ p {
 }
 
 #controls.mobile {
-
+    width: 100%;
+    order: 99;
 }
 
 #copyPrompt {
@@ -88,7 +89,7 @@ p {
 }
 
 #idLabel.mobile {
-    
+    font-size: 4.8vw;    
 }
 
 #idLabel:hover {
@@ -108,6 +109,7 @@ p {
 }
 
 #settings.mobile {
+    width: 50%;
     flex-direction: row;
 }
 
@@ -118,6 +120,12 @@ p {
 
 #settings > hr.mobile {
     display: none;
+}
+
+#scalingRadioHolder.mobile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 #historyExpander {
