@@ -33,6 +33,7 @@ async function getNewImage() {
         await getValidId().then(
             function resolved(id) {
                 pushImage(id)
+                disableControls(false)
             }
         )
     } else {
@@ -218,7 +219,7 @@ function pushImage(imgId) {
     imgHolder.setAttribute("src", getUrl(currentId))
     setupScaling()
     historyBuffer.unshift(imgId)
-    if (historyBuffer.length > 10) {
+    if (historyBuffer.length > 30) {
         historyBuffer.pop()
     }    
     renderHistory()
