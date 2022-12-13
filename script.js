@@ -269,7 +269,7 @@ function renderHistory() {
 //#region manage settings
 var newImgControlsDisabled = false
 var playNotif = false
-var threads = 10
+var threads = 1
 
 function disableControls(disable) {
     if(disable) {
@@ -284,7 +284,7 @@ function disableControls(disable) {
 }
 
 function setThreadCount(num) {
-    if (num % 1 != 0){
+    if (num % 1 == 0){
         threads = num
     }    
 }
