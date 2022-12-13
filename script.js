@@ -452,7 +452,7 @@ function handleTouchMove(evt) {
 function setMobileMode(enabled) {
     var section = document.getElementById("section")
 
-    var children = section.querySelectorAll()
+    var children = section.querySelectorAll("*")
     children.forEach((child) => {
         if (enabled) {
             child.classList.add("mobile")
