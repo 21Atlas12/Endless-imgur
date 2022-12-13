@@ -37,12 +37,15 @@ function setup() {
 var idLen = 5;
 
 async function getNewImage() {    
-    disableControls(true)    
+    disableControls(true)
+    var label = document.getElementById("copyPrompt")
+    label.innerHTML = "searching..."    
     
     if (threads < 2) {
         await getValidId().then(
             function resolved(id) {
                 pushImage(id)
+                label.innerHTML = "click to copy"
                 disableControls(false)
             }
         )
@@ -75,6 +78,7 @@ async function getNewImage() {
                         })
         
                         disableControls(false)
+                        label.innerHTML = "click to copy"
                         pushImage(data)
                 }
                 if (data.startsWith("@")) {
@@ -259,19 +263,17 @@ function renderHistory() {
 //#endregion
 
 //#region manage settings
-var newImgControlsDisabled = false
+var controlsDisabled = false
 var playNotif = false
 var threads = 1
 
 function disableControls(disable) {
     if(disable) {
-        newImgControlsDisabled = true
+        controlsDisabled = true
         document.getElementById("newImgButton").disabled = true;
-        document.getElementById("copyUrlButton").disabled = true;
     } else {
-        newImgControlsDisabled = false
+        controlsDisabled = false
         document.getElementById("newImgButton").disabled = false;
-        document.getElementById("copyUrlButton").disabled = false;
     }
 }
 
@@ -295,7 +297,7 @@ function toggleNotif() {
 
 function showHistory(visible) {
     var divider = document.getElementById("historyExpander")
-    var historyHolder = document.getElementById("history")
+    var historyHolder = document.getElementById("historyWheel")
     var expandIcon = document.getElementById("expandIcon")
     if (visible) {
         historyHolder.style.display = "initial"
@@ -309,25 +311,21 @@ function showHistory(visible) {
     }
 }
 
-function cycleScaling(){
-    switch(currentScaling) {
-        case scalingTypes.fit:
-            currentScaling = scalingTypes.stretch
-            break;
-
-        case scalingTypes.stretch:
-            currentScaling = scalingTypes.nearestNeighbour
-            break;
-
-        case scalingTypes.nearestNeighbour:
+function selectScaling() {
+    switch(true) {
+        case document.getElementById("fitRadio").checked:
             currentScaling = scalingTypes.fit
             break;
-
+        case document.getElementById("stretchRadio").checked:
+            currentScaling = scalingTypes.stretch
+            break;
+        case document.getElementById("NnRadio").checked:
+            currentScaling = scalingTypes.nearestNeighbour
+            break;
         default:
-            currentScaling = scalingTypes.fit               
+            currentScaling = scalingTypes.fit    
     }
 
-    document.getElementById("scalingButton").innerHTML = currentScaling
     setupScaling()
 }
 
@@ -360,21 +358,23 @@ function notify() {
 }
 
 function copyCurrentUrl() {
-    var button = document.getElementById("copyUrlButton")
+    if (!controlsDisabled) {
+        var label = document.getElementById("copyPrompt")
 
     try {
         navigator.clipboard.writeText(getUrl(currentId))
-        button.style.backgroundColor = "greenyellow"
-        button.innerHTML = "copied!"
+        label.style.color = "greenyellow"
+        label.innerHTML = "copied!"
     } catch (error) {
-        button.style.backgroundColor = "tomato"
-        button.innerHTML = "error!"
+        label.style.color = "tomato"
+        label.innerHTML = "error!"
     }
     
     setTimeout(function () {
-        button.removeAttribute("style")
-        button.innerHTML = "copy URL"
+        label.removeAttribute("style")
+        label.innerHTML = "click to copy"
       }, 300);
+    }    
 }
 
 //#endregion
@@ -415,7 +415,7 @@ function handleTouchStart(evt) {
 };
                                                                          
 function handleTouchMove(evt) {
-    if (!newImgControlsDisabled) {
+    if (!controlsDisabled) {
         if ( ! xDown || ! yDown ) {
             return;
         }

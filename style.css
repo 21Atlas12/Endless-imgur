@@ -36,46 +36,88 @@ p {
 
 #header {
     width: 100%;
+    height: fit-content;
     background-color: rgb(200, 160, 240);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;    
     padding: 10px;
     margin-bottom: 10px;
 }
 
+#section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;  
+    width: 100%;
+}
+
 #title {
-    font-size: 2.4vw; 
-    width: 70%;
+    font-size: 2.5vw;
+    font-weight: bold;
+    text-align: center;
+    width: 25%;
 }
 
 #title.mobile {
+    font-size: 5vw;
     width: 50%;
 }
 
-#controls td {
+#controls {
     width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center; 
 }
 
 #controls.mobile {
-    width: 50%;
+
 }
 
-#copyUrlButton {
-    width: 90%;
+#copyPrompt {
+    font-size: 0.8vw;
 }
 
-#history {
-    width: 100%;
-    padding: 4px;
-    overflow-x: auto;
-    white-space: nowrap;
-}
-
-#controls > * {
-    height: fit-content;
+#idLabel {
+    font-size: 2.4vw;
     text-align: center;
+}
+
+#idLabel.mobile {
+    
+}
+
+#idLabel:hover {
+    text-decoration: underline;
+}
+
+
+#newImgButton {
+    width: 25%;
+    font-size: 1.5vw;
+}
+
+#settings {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+#settings.mobile {
+    flex-direction: row;
+}
+
+#settings > hr {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+#settings > hr.mobile {
+    display: none;
 }
 
 #historyExpander {
@@ -97,4 +139,11 @@ p {
 
 #historyExpander > img {
     width: 2%;
+}
+
+#historyWheel {
+    width: 100%;
+    padding: 4px;
+    overflow-x: auto;
+    white-space: nowrap;
 }
