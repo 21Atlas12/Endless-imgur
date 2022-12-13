@@ -156,6 +156,11 @@ p {
     white-space: nowrap;
 }
 
+#currentImage {
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #footer {
     display: flex;
     flex-direction: row;

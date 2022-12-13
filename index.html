@@ -7,44 +7,50 @@
   <title>Endless Imgur</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="">
-  <script src="script.js"></script>  
+  <script src="script.js"></script>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href = "../favicon.ico"> 
+  <link rel="icon" href="../favicon.ico">
 </head>
 
-<body>  
-    <div id="header">
-      <div id="section">
-        <p id="title">Endless∞Imgur</p>
-        <div id="controls"> 
-          <p id="copyPrompt" onclick="copyCurrentUrl()"> click to copy</p>
-          <p id="idLabel" onclick="copyCurrentUrl()">NO IMAGE</p> 
-          <button onclick="getNewImage()" id="newImgButton">new image</button>
-        </div>
-        <div id="settings">
-          <div>
-            <input type="checkbox" autocomplete="off" onclick="toggleIdLen()" id="7DigitToggle" title="imgur used 5 digit image IDs from 2009-2012, 7 digit IDs have been used since 2013, search 5 digit IDs will be much faster, but only show images from before 2013">
-            <label for="7DigitToggle" onclick="toggleIdLen()" title="imgur used 5 digit image IDs from 2009-2012, 7 digit IDs have been used since 2013, search 5 digit IDs will be much faster, but only show images from before 2013">7 Digit IDs</label>
-          </div>
-          
-          <hr>
-
-          <div id="scalingRadioHolder">
-            <input type="radio" id="fitRadio" name="scaling" onclick="selectScaling()" autocomplete="off" checked>
-            <label for="fitRadio">fit</label><br>
-            <input type="radio" id="stretchRadio" name="scaling" onclick="selectScaling()" autocomplete="off">
-            <label for="stretchRadio">stretch</label><br>
-            <input type="radio" id="NnRadio" name="scaling" onclick="selectScaling()" autocomplete="off">
-            <label for="NnRadio">nearest neighbor</label> 
-          </div>     
-        </div> 
+<body>
+  <div id="header">
+    <div id="section">
+      <p id="title">Endless∞Imgur</p>
+      
+      <div id="controls">
+        <p id="copyPrompt" onclick="copyCurrentUrl()"> click to copy</p>
+        <p id="idLabel" onclick="copyCurrentUrl()">NO IMAGE</p>
+        <button onclick="getNewImage()" id="newImgButton">new image</button>
       </div>
-     
-      <div id="historyExpander" onclick="showHistory(false)">
+
+      <div id="settings">
+        <div>
+          <input type="checkbox" autocomplete="off" onclick="toggleIdLen()" id="7DigitToggle"
+            title="imgur used 5 digit image IDs from 2009-2012, 7 digit IDs have been used since 2013, search 5 digit IDs will be much faster, but only show images from before 2013">
+          <label for="7DigitToggle" onclick="toggleIdLen()"
+            title="imgur used 5 digit image IDs from 2009-2012, 7 digit IDs have been used since 2013, search 5 digit IDs will be much faster, but only show images from before 2013">7
+            Digit IDs</label>
+        </div>
+
+        <hr>
+
+        <div id="scalingRadioHolder">
+          <input type="radio" id="fitRadio" name="scaling" onclick="selectScaling()" autocomplete="off" checked>
+          <label for="fitRadio">fit</label><br>
+          <input type="radio" id="stretchRadio" name="scaling" onclick="selectScaling()" autocomplete="off">
+          <label for="stretchRadio">stretch</label><br>
+          <input type="radio" id="NnRadio" name="scaling" onclick="selectScaling()" autocomplete="off">
+          <label for="NnRadio">nearest neighbor</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="historyExpander" onclick="showHistory(false)">
       <hr class="historyDivider">
       <img id="expandIcon" src="res/expand.svg" style="transform: rotate(180deg);">
-      <hr class="historyDivider">      
+      <hr class="historyDivider">
     </div>
+
     <div id="historyWheel">
       <img class="historyImage" id="pastImg1" onclick="loadHistory(0)">
       <img class="historyImage" id="pastImg2" onclick="loadHistory(1)">
@@ -76,27 +82,28 @@
       <img class="historyImage" id="pastImg28" onclick="loadHistory(27)">
       <img class="historyImage" id="pastImg29" onclick="loadHistory(28)">
       <img class="historyImage" id="pastImg30" onclick="loadHistory(29)">
+    </div>
   </div>
+
+  <img id="currentImage">
+
+  <div id="footer">
+    <a href="https://github.com/21Atlas12/Endless-imgur">Github</a>
+
+    <div id="footerSettings">
+      <label for="threadCountPicker">thread count</label>
+      <input type="number" inputmode="numeric" value="1" id="threadCountPicker" min="1" max="32" pattern="\d*"
+        style="width: 55px;">
+
+      <input type="checkbox" autocomplete="off" onclick="toggleNotif()" id="notifToggle">
+      <label for="notifToggle" onclick="toggleNotif()">image found alerts</label>
     </div>
-    <center id="content">
-      <img id="currentImage">
-    </center>
 
-    <div id="footer">
-      <a href="https://github.com/21Atlas12/Endless-imgur">Github</a>
-
-      <div id="footerSettings">
-        <label for="threadCountPicker">thread count</label>
-        <input type="number" inputmode="numeric" value="1" id="threadCountPicker" min="1" max="32" pattern="\d*" style="width: 55px;" >      
-
-        <input type="checkbox" autocomplete="off" onclick="toggleNotif()" id="notifToggle" >
-        <label for="notifToggle" onclick="toggleNotif()">image found alerts</label> 
-      </div>    
-      
-    </div>
+  </div>
 
   <script>setup()</script>
   <script>getNewImage()</script>
 
 </body>
+
 </html>
