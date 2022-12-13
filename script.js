@@ -49,6 +49,7 @@ async function getNewImage() {
                         worker.terminate()
                     })
     
+                    disableControls(false)
                     pushImage(data)
                 }                
             })
@@ -57,8 +58,7 @@ async function getNewImage() {
         pool.forEach((worker) => {
             worker.postMessage(idLen.toString() + "," + carefulSearch.toString())
         })        
-    }
-    disableControls(false)
+    }    
 }
 
 function getValidId() {
