@@ -31,6 +31,22 @@ function setup() {
             }
         }        
       }
+
+    var threadPicker = document.getElementById("threadCountPicker")
+    threadPicker.addEventListener("input", () => {
+        threadPicker.value = threadPicker.value.replace(/\D+/g, ''); 
+        if (threadPicker.value > 32) {
+            threadPicker.value = 32
+        };
+        if (threadPicker.value < 1) {
+            threadPicker.value = 1
+        } 
+        if (!threadPicker.value) {
+            threadPicker.value = 1
+        }
+        
+        setThreadCount(threadPicker.value)
+    })
 }
 
 //#region fetching images
