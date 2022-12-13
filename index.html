@@ -13,9 +13,10 @@
 </head>
 
 <body>  
-    <div id="header" class="sidways">
+    <div id="header">
       <h1 id="title">Endless∞Imgur</h1>
-      <div id="controls">
+      <div id="controls"></div>
+      <div id="settings">
         <table style="height: 100%;">
           <tr style="height: 30%;">
             <td> <p id="idLabel">NO IMAGE</p> </td>
@@ -82,8 +83,9 @@
     </center>
 
     <div id="footer">
+      <a href="https://github.com/21Atlas12/Endless-imgur">Github</a>
       <label for="threadCountPicker">thread count</label>
-      <input type="number" inputmode="numeric" value="1" id="threadCountPicker" min="1" max="32" pattern="\d*" oninput="this.value = this.value.replace(/\D+/g, ''); if (this.value > 32) {this.value = 32}; setThreadCount(this.value)" >      
+      <input type="number" inputmode="numeric" value="1" id="threadCountPicker" min="1" max="32" pattern="\d*" style="width: 55px;" oninput="this.value = this.value.replace(/\D+/g, ''); if (this.value > 32) {this.value = 32}; setThreadCount(this.value)" >      
 
       <input type="checkbox" autocomplete="off" onclick="toggleNotif()" id="notifToggle" >
       <label for="notifToggle" onclick="toggleNotif()">notify when image found</label> 

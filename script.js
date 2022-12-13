@@ -20,6 +20,17 @@ function setup() {
         setupScaling()
         checkForFunny(imgHolder)
     })
+
+    document.onkeyup = function(e) {
+        if (!disableControls) {
+            if (e.key == " " ||
+            e.code == "Space" ||      
+            e.keyCode == 32      
+            ) {
+            getNewImage()
+            }
+        }        
+      }
 }
 
 //#region fetching images
