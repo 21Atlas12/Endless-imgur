@@ -63,6 +63,10 @@ async function getNewImage() {
                 pushImage(id)
                 label.innerHTML = "click to copy"
                 disableControls(false)
+
+                if (playNotif) {
+                    notify()
+                }
             }
         )
     } else {
@@ -96,6 +100,10 @@ async function getNewImage() {
                         disableControls(false)
                         label.innerHTML = "click to copy"
                         pushImage(data)
+
+                        if (playNotif) {
+                            notify()
+                        }
                 }
                 if (data.startsWith("@")) {
                     
@@ -145,7 +153,7 @@ function getValidId() {
 
 function generateId() {
     var id = "";
- 
+    
     for (var i = 0; i < idLen; i++) {
         var charIndex = Math.round(Math.random() * (chars.length - 1));
         id += chars.charAt(charIndex);
@@ -232,10 +240,7 @@ function pushImage(imgId) {
     if (historyBuffer.length > 30) {
         historyBuffer.pop()
     }    
-    renderHistory()
-    if (playNotif) {
-        notify()
-    }
+    renderHistory()    
 }
 
 function setupScaling() {
