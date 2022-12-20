@@ -47,6 +47,32 @@ function setup() {
         
         setThreadCount(threadPicker.value)
     })
+
+    const slider = document.getElementById("historyWheel")
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    slider.addEventListener('mousedown', (e) => {
+        e.preventDefault()
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+    slider.addEventListener('mousemove', (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = (x - startX) * 3; //scroll-fast
+        slider.scrollLeft = scrollLeft - walk;
+        console.log(walk);
+    });
 }
 
 //#region fetching images
@@ -234,7 +260,9 @@ const scalingTypes = {
 var currentScaling = scalingTypes.fit
 
 function pushImage(imgId) {    
+    var idLabel = document.getElementById("idLabel")
     currentId = imgId
+    idLabel.innerHTML = "ID: " + currentId
     imgHolder.setAttribute("src", getUrl(currentId))    
     historyBuffer.unshift(imgId)
     if (historyBuffer.length > 30) {
@@ -418,7 +446,7 @@ function showErrorToUser(msg) {
 
 //#endregion
 
-//#region touch functions
+//#region gesture functions
 var xDown = null;                                                        
 var yDown = null;
 
