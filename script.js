@@ -39,6 +39,10 @@ function setup() {
     if (!isNaN(threadCookieVal)) {
         threadCount = threadCookieVal
         threadPicker.value = threadCount
+    } else {        
+        threadCount = 1
+        threadPicker.value = threadCount
+        writeCookie("threadCount" , threadCount)
     }
     
     const slider = document.getElementById("historyWheel")
