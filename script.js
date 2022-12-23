@@ -16,6 +16,8 @@ function setup() {
     imgHolder = document.getElementById("currentImage");   
     imgHolder.crossOrigin = "anonymous"; 
 
+    threadCount = readCookie("threadCount")
+
     imgHolder.addEventListener("load", () => {
         setupScaling()
         checkForFunny(imgHolder)
@@ -33,20 +35,7 @@ function setup() {
       }
 
     var threadPicker = document.getElementById("threadCountPicker")
-    threadPicker.addEventListener("input", () => {
-        threadPicker.value = threadPicker.value.replace(/\D+/g, ''); 
-        if (threadPicker.value > 32) {
-            threadPicker.value = 32
-        };
-        if (threadPicker.value < 1) {
-            threadPicker.value = 1
-        } 
-        if (!threadPicker.value) {
-            threadPicker.value = 1
-        }
-        
-        setThreadCount(threadPicker.value)
-    })
+    threadPicker.addEventListener("input", readThreadCount )
 
     const slider = document.getElementById("historyWheel")
     let isDown = false;
@@ -329,6 +318,7 @@ function disableControls(disable) {
 function setThreadCount(num) {
     if (num % 1 == 0){
         threads = num
+        writeCookie("threadCount", num)
     }    
 }
 
@@ -406,6 +396,21 @@ function notify() {
     }
 }
 
+function readThreadCount() {
+    threadPicker.value = threadPicker.value.replace(/\D+/g, ''); 
+    if (threadPicker.value > 32) {
+        threadPicker.value = 32
+    };
+    if (threadPicker.value < 1) {
+        threadPicker.value = 1
+    } 
+    if (!threadPicker.value) {
+        threadPicker.value = 1
+    }
+    
+    setThreadCount(threadPicker.value)
+}
+
 function copyCurrentUrl() {
     if (!controlsDisabled) {
         var label = document.getElementById("copyPrompt")
@@ -424,6 +429,25 @@ function copyCurrentUrl() {
         label.innerHTML = "click to copy"
       }, 300);
     }    
+}
+
+//#endregion
+
+//#region cookies
+
+function writeCookie(key, val) {
+    document.cookie = key+"="+val
+}
+
+function readCookie(key) {
+    var nameEQ = key + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
 }
 
 //#endregion

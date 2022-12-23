@@ -16,22 +16,8 @@ html, body {
     background-color: rgb(43, 43, 43);
 }
 
-#footer {
-    position: fixed; 
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    height: 25px;
-    background-color: rgb(200, 160, 240);
-}
-
 p {
     margin: 0px;
-}
-
-#content {
-    padding-bottom: 30px;
 }
 
 #header {
@@ -55,14 +41,14 @@ p {
 }
 
 #title {
-    font-size: 2.5vw;
+    font-size: 3.2vmin;
     font-weight: bold;
     text-align: center;
     width: 25%;
 }
 
 #title.mobile {
-    font-size: 5vw;
+    font-size: 5vmin;
     width: 50%;
 }
 
@@ -80,18 +66,18 @@ p {
 }
 
 #copyPrompt {
-    font-size: 0.8vw;
+    font-size: 1.1vmin;
 }
 
 #idLabel {
-    font-size: 2.4vw;
+    font-size: 2.4vmin;
     text-align: center;
     cursor: pointer;
     margin-bottom: 4px;
 }
 
 #idLabel.mobile {
-    font-size: 4.8vw;    
+    font-size: 4.8vmin;    
 }
 
 #idLabel:hover {
@@ -101,7 +87,7 @@ p {
 
 #newImgButton {
     width: 25%;
-    font-size: 1.5vw;
+    font-size: 1.5vmin;
 }
 
 #newImgButton:disabled {
@@ -152,7 +138,7 @@ p {
 }
 
 #historyExpander > img {
-    width: 2%;
+    width: 2vmin;
 }
 
 #historyWheel {
@@ -165,6 +151,7 @@ p {
 }
 
 #currentImage {
+    padding-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -174,6 +161,13 @@ p {
     flex-direction: row;
     padding-left: 8px;
     padding-right: 8px;
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 25px;
+    background-color: rgb(200, 160, 240);
 }
 
 #footerSettings {
