@@ -423,21 +423,38 @@ function readThreadCount() {
 function copyCurrentUrl() {
     if (!controlsDisabled) {
         var label = document.getElementById("copyPrompt")
+        var success = true
 
-    try {
-        navigator.clipboard.writeText(getUrl(currentId))
-        label.style.color = "greenyellow"
-        label.innerHTML = "copied!"
-    } catch (error) {
-        label.style.color = "tomato"
-        label.innerHTML = "error!"
-    }
-    
-    setTimeout(function () {
-        label.removeAttribute("style")
-        label.innerHTML = "click to copy"
-      }, 300);
+        try {
+            navigator.clipboard.writeText(getUrl(currentId))
+            label.style.color = "greenyellow"
+            label.innerHTML = "copied!"
+        } catch (error) {
+            label.style.color = "tomato"
+            label.innerHTML = "error!"
+            success = false
+        }
+        
+        setTimeout(function () {
+            label.removeAttribute("style")
+            label.innerHTML = "click to copy"
+        }, 300);
+
+        return success
     }    
+}
+
+function reportImage() {
+    var response = confirm("Are you sure you want to report this image? If you press \"OK\" the current images URL will be copied to your clipboard, and you will be redirected to imgurs removal request page.")
+
+    if (response) {
+        if (copyCurrentUrl()) {
+            window.open("https://imgur.com/removalrequest", '_blank')
+        } else {
+            alert("Failed to copy current URL");
+        }
+        
+    }
 }
 
 //#endregion
