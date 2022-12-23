@@ -35,7 +35,7 @@ function setup() {
     var threadPicker = document.getElementById("threadCountPicker")
     threadPicker.addEventListener("input", readThreadCount )
 
-    threadCount = readCookie("threadCount")
+    threads = readCookie("threadCount")
     threadPicker.value = threadCount
 
     const slider = document.getElementById("historyWheel")
