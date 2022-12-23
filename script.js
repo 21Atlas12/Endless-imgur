@@ -397,6 +397,7 @@ function notify() {
 }
 
 function readThreadCount() {
+    document.getElementById("threadCountPicker")
     threadPicker.value = threadPicker.value.replace(/\D+/g, ''); 
     if (threadPicker.value > 32) {
         threadPicker.value = 32
