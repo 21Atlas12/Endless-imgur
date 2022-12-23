@@ -16,8 +16,6 @@ function setup() {
     imgHolder = document.getElementById("currentImage");   
     imgHolder.crossOrigin = "anonymous"; 
 
-    threadCount = readCookie("threadCount")
-
     imgHolder.addEventListener("load", () => {
         setupScaling()
         checkForFunny(imgHolder)
@@ -36,6 +34,9 @@ function setup() {
 
     var threadPicker = document.getElementById("threadCountPicker")
     threadPicker.addEventListener("input", readThreadCount )
+
+    threadCount = readCookie("threadCount")
+    threadPicker.value = threadCount
 
     const slider = document.getElementById("historyWheel")
     let isDown = false;
