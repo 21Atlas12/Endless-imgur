@@ -35,9 +35,12 @@ function setup() {
     var threadPicker = document.getElementById("threadCountPicker")
     threadPicker.addEventListener("input", readThreadCount )
 
-    threads = readCookie("threadCount")
-    threadPicker.value = threads
-
+    threadCookieVal = readCookie("threadCount")
+    if (!isNaN(threadCookieVal)) {
+        threadCount = threadCookieVal
+        threadPicker.value = threadCount
+    }
+    
     const slider = document.getElementById("historyWheel")
     let isDown = false;
     let startX;
@@ -59,7 +62,7 @@ function setup() {
         if(!isDown) return;
         e.preventDefault();
         const x = e.pageX - slider.offsetLeft;
-        const walk = (x - startX) * 3; //scroll-fast
+        const walk = (x - startX);
         slider.scrollLeft = scrollLeft - walk;
         console.log(walk);
     });
@@ -73,7 +76,7 @@ async function getNewImage() {
     var label = document.getElementById("copyPrompt")
     label.innerHTML = "searching..."    
     
-    if (threads < 2) {
+    if (threadCount < 2) {
         await getValidId().then(
             function resolved(id) {
                 pushImage(id)
@@ -88,7 +91,7 @@ async function getNewImage() {
     } else {
         var pool = []        
         let idLabel = document.getElementById("idLabel")
-        for (let i = 0; i < (threads); i++) {
+        for (let i = 0; i < (threadCount); i++) {
             var newWorker = new Worker("worker.js")
             newWorker.addEventListener("message", function(msg) {
                 var data = msg.data
@@ -304,7 +307,7 @@ function renderHistory() {
 //#region manage settings
 var controlsDisabled = false
 var playNotif = false
-var threads = 1
+var threadCount = 1
 
 function disableControls(disable) {
     if(disable) {
@@ -318,7 +321,7 @@ function disableControls(disable) {
 
 function setThreadCount(num) {
     if (num % 1 == 0){
-        threads = num
+        threadCount = num
         writeCookie("threadCount", num)
     }    
 }
