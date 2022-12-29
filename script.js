@@ -2,16 +2,50 @@ const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 var imgHolder = null
 var currentId = ""
 
-//setup listeners, init values
-function setup() {
+function setup() {  
+
+    //load settings
+    var threadPicker = document.getElementById("threadCountPicker")    
+
+    threadCookieVal = readCookie("threadCount")
+    if (!isNaN(threadCookieVal) && !!threadCookieVal) {
+        threadCount = threadCookieVal
+        threadPicker.value = threadCount           
+    } else {        
+        threadCount = 1
+        threadPicker.value = threadCount
+        writeCookie("threadCount" , threadCount)     
+    }
+
+    var idLenCheckbox = document.getElementById("7DigitToggle")
+    var idLenCookieVal = readCookie("idLen")
+
+    if (idLenCookieVal == 7) {
+        idLen = idLenCookieVal
+        idLenCheckbox.checked = true
+    } else {
+        idLen = 5
+        idLenCheckbox.checked = false
+    }
+
+    var notifyCheckbox = document.getElementById("notifToggle")
+    var playNotifCookieVal = readCookie("playNotif")
+
+    if (playNotifCookieVal == true) {
+        playNotif = true
+        notifyCheckbox.checked = true
+    } else {
+        playNotif = false
+        notifyCheckbox.checked = false
+    }
+
+    //setup listeners
+    threadPicker.addEventListener("input", readThreadCount )
     document.addEventListener('visibilitychange', () => {
         if (document.visibilityState === "visible") {
             setFavicon(false)
         }
-    })
-
-    document.addEventListener('touchstart', handleTouchStart, false);        
-    document.addEventListener('touchmove', handleTouchMove, false);
+    })       
 
     imgHolder = document.getElementById("currentImage");   
     imgHolder.crossOrigin = "anonymous"; 
@@ -27,22 +61,9 @@ function setup() {
             e.code == "Space" ||      
             e.keyCode == 32      
             ) {
-            getNewImage()
+                getNewImage()
             }
         }        
-      }
-
-    var threadPicker = document.getElementById("threadCountPicker")
-    threadPicker.addEventListener("input", readThreadCount )
-
-    threadCookieVal = readCookie("threadCount")
-    if (!isNaN(threadCookieVal) && !!threadCookieVal) {
-        threadCount = threadCookieVal
-        threadPicker.value = threadCount           
-    } else {        
-        threadCount = 1
-        threadPicker.value = threadCount
-        writeCookie("threadCount" , threadCount)     
     }
     
     const slider = document.getElementById("historyWheel")
@@ -326,20 +347,22 @@ function disableControls(disable) {
 function setThreadCount(num) {
     if (num % 1 == 0){
         threadCount = num
-        writeCookie("threadCount", num)
+        writeCookie("threadCount", threadCount)
     }    
 }
 
 function toggleIdLen() {
     if (document.getElementById("7DigitToggle").checked) {
-        idLen = 7
+        idLen = 7        
     } else {
         idLen = 5
     }
+    writeCookie("idLen", idLen)
 }
 
 function toggleNotif() {
     playNotif = document.getElementById("notifToggle").checked
+    writeCookie("playNotif", playNotif)
 }
 
 function showHistory(visible) {
