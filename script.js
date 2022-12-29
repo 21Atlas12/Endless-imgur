@@ -31,7 +31,7 @@ function setup() {
     var notifyCheckbox = document.getElementById("notifToggle")
     var playNotifCookieVal = readCookie("playNotif")
 
-    if (playNotifCookieVal == true) {
+    if (playNotifCookieVal) {
         playNotif = true
         notifyCheckbox.checked = true
     } else {
