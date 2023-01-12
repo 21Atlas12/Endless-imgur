@@ -411,14 +411,14 @@ function setFavicon(isAlert) {
     }
     
     if (isAlert) {
-        link.href = 'res/alertFavicon.ico';
+        link.href = '../commonRes/alertFavicon.ico';
     } else {
-        link.href = '../favicon.ico'
+        link.href = '../commonRes/favicon.ico'
     }
 }
 
 function notify() {
-    var notifSound = ((Math.floor(Math.random() * 11)) == 1 ? "res/scorn.mp3" : "res/notif.wav" )
+    var notifSound = ((Math.floor(Math.random() * 11)) == 1 ? "../commonRes/scorn.mp3" : "../commonRes/notif.wav" )
     var audio = new Audio(notifSound);
     audio.play();
 
